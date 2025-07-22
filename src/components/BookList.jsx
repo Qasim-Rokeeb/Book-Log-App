@@ -1,29 +1,31 @@
 import BookCard from "./BookCard";
 
-export default function BookList({ books, onDelete, onUpdate }) {
-  const grouped = {
-    "To Read": books.filter((b) => b.status === "To Read"),
-    "Reading": books.filter((b) => b.status === "Reading"),
-    "Finished": books.filter((b) => b.status === "Finished"),
-  };
+const statuses = ["To Read", "Reading", "Finished"];
 
+export default function BookList({ books, onDelete, onUpdate }) {
   return (
-    <div className="mt-8 space-y-6">
-      {Object.entries(grouped).map(([status, books]) => (
-        <div key={status}>
-          <h2 className="text-xl font-semibold mb-2">{status}</h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {books.map((book) => (
-              <BookCard
-                key={book.id}
-                book={book}
-                onDelete={onDelete}
-                onUpdate={onUpdate}
-              />
-            ))}
+    <section className="mt-10 space-y-10">
+      {statuses.map((status) => {
+        const filtered = books.filter((b) => b.status === status);
+        return (
+          <div key={status}>
+            <h2 className="font-poppins text-2xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">
+              {status} <span className="text-base font-normal">({filtered.length})</span>
+            </h2>
+            {filtered.length ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filtered.map((book) => (
+                  <BookCard key={book.id} book={book} onDelete={onDelete} onUpdate={onUpdate} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                No books in this category yet.
+              </p>
+            )}
           </div>
-        </div>
-      ))}
-    </div>
+        );
+      })}
+    </section>
   );
 }

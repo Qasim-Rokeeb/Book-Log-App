@@ -7,7 +7,7 @@ export default function BookForm({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !author) return;
+    if (!title.trim() || !author.trim()) return;
     onAdd({ id: Date.now(), title, author, status });
     setTitle("");
     setAuthor("");
@@ -15,35 +15,48 @@ export default function BookForm({ onAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-4 rounded shadow space-y-4">
-      <div className="flex flex-col sm:flex-row gap-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col md:flex-row items-end gap-4 p-5 rounded-2xl bg-white/70 dark:bg-gray-800/50 backdrop-blur-md shadow-md"
+    >
+      <div className="flex-1 w-full">
+        <label className="block text-sm font-medium mb-1">Title</label>
         <input
           type="text"
-          placeholder="Book Title"
-          className="flex-1 px-4 py-2 rounded border dark:bg-gray-700"
+          placeholder="Book title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700/60 focus:ring-2 focus:ring-indigo-500 outline-none"
         />
+      </div>
+
+      <div className="flex-1 w-full">
+        <label className="block text-sm font-medium mb-1">Author</label>
         <input
           type="text"
           placeholder="Author"
-          className="flex-1 px-4 py-2 rounded border dark:bg-gray-700"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
+          className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700/60 focus:ring-2 focus:ring-indigo-500 outline-none"
         />
+      </div>
+
+      <div className="w-full md:w-auto">
+        <label className="block text-sm font-medium mb-1">Status</label>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="px-4 py-2 rounded border dark:bg-gray-700"
+          className="w-full md:w-40 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700/60 focus:ring-2 focus:ring-indigo-500 outline-none"
         >
           <option>To Read</option>
           <option>Reading</option>
           <option>Finished</option>
         </select>
       </div>
+
       <button
         type="submit"
-        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+        className="w-full md:w-auto px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
       >
         Add Book
       </button>

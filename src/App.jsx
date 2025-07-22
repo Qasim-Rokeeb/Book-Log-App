@@ -14,20 +14,20 @@ export default function App() {
   }, [books]);
 
   const addBook = (book) => setBooks([...books, book]);
-
-  const deleteBook = (id) =>
-    setBooks(books.filter((book) => book.id !== id));
-
-  const updateBook = (updatedBook) =>
-    setBooks(books.map((book) => (book.id === updatedBook.id ? updatedBook : book)));
+  const deleteBook = (id) => setBooks(books.filter((b) => b.id !== id));
+  const updateBook = (updated) =>
+    setBooks(books.map((b) => (b.id === updated.id ? updated : b)));
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">📚 Book Log</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black text-gray-800 dark:text-gray-100 font-inter transition-all">
+      <div className="max-w-5xl mx-auto px-4 py-10">
+        <header className="flex items-center justify-between mb-8">
+          <h1 className="font-poppins text-4xl font-bold tracking-tight">
+            📚 Book Log
+          </h1>
           <ThemeToggle />
-        </div>
+        </header>
+
         <BookForm onAdd={addBook} />
         <BookList books={books} onDelete={deleteBook} onUpdate={updateBook} />
       </div>

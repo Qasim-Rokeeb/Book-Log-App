@@ -2,26 +2,27 @@ import { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(() =>
+  const [dark, setDark] = useState(() =>
     localStorage.getItem("theme") === "dark"
   );
 
   useEffect(() => {
-    if (darkMode) {
+    if (dark) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [darkMode]);
+  }, [dark]);
 
   return (
     <button
-      onClick={() => setDarkMode(!darkMode)}
-      className="text-2xl focus:outline-none"
+      onClick={() => setDark(!dark)}
+      className="p-2.5 rounded-full bg-white/30 dark:bg-gray-800/30 backdrop-blur-md shadow-md hover:shadow-lg transition"
+      aria-label="Toggle theme"
     >
-      {darkMode ? <FaSun /> : <FaMoon />}
+      {dark ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-indigo-600" />}
     </button>
   );
 }
