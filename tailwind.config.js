@@ -5,18 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
  darkMode: "class", 
-  theme: {
-    extend: {
-      colors: {
-        brandDark: "#0b0b0d",
-        brandBlue: "#125795",
-      },
-      fontFamily :{
-        merriweather: ["Merriweather", 'serif'],
-        montserrat: ["Montserrat", 'sans-serif'],
-      },
+theme: {
+  extend: {
+    colors: {
+      brandBlue: '#2563eb',
+      lightBg: '#f9f9f9',
+      lightCard: '#ffffff',
     },
   },
+},
+
   plugins: [],
 }
 
